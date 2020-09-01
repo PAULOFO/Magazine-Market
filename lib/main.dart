@@ -38,8 +38,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Magazine Market',
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
+        primaryColor: Colors.deepPurple,
+        //primarySwatch: Colors.deepPurple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        scaffoldBackgroundColor: Colors.deepPurple,
+        appBarTheme: AppBarTheme(
+          elevation: 0,
+        ),
+        cursorColor: Colors.orangeAccent,
       ),
       home: BaseScreen(),
     );
