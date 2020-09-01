@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:magazine_market/screens/base/base_screen.dart';
+import 'package:magazine_market/stores/page_store.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
+import 'package:get_it/get_it.dart';
 
 void main() async {
   //O BINDING DO FLUTTER DEVE ESTAR INICIALIZADO ANTES DO PARSE
   WidgetsFlutterBinding.ensureInitialized();
   //ANTES DE INICIAR O APP DEVE-SE INICIAR O PARSE
   await initializeParse();
+  setupLocators();//Get_it
   runApp(MyApp());
 
+}
+//Get_it é um service locator/localizador de serviços
+//Singleton é um objeto que só existe um no app
+void setupLocators() {
+  GetIt.I.registerSingleton(PageStore());
 }
 
 Future<void> initializeParse() async {
