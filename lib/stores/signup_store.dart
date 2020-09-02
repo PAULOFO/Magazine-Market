@@ -1,3 +1,5 @@
+import 'package:magazine_market/models/user.dart';
+import 'package:magazine_market/repositories/user_repository.dart';
 import 'package:mobx/mobx.dart';
 import 'package:magazine_market/helpers/extensions.dart';
 
@@ -106,7 +108,16 @@ abstract class _SignupStore with Store {
   Future<void> _signUp() async {
     loading = true;
 
-    await Future.delayed(Duration(seconds: 3));
+    final user = User(
+      name: name,
+      email: email,
+      phone: phone,
+      password: pass1
+    );
+
+    await UserRepository().signUp(user);
+
+    //await Future.delayed(Duration(seconds: 3));
 
     loading = false;
   }
