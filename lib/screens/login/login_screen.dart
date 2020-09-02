@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magazine_market/screens/signup/signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -14,7 +15,7 @@ class LoginScreen extends StatelessWidget {
           child: Card(
             margin: const EdgeInsets.symmetric(horizontal: 32),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50),
+              borderRadius: BorderRadius.circular(16),
             ),
             elevation: 20,
             child: Padding(
@@ -112,8 +113,8 @@ class LoginScreen extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: (){
-                            // Navigator.of(context).push(MaterialPageRoute(
-                            //     builder: (context) => SignUpScreen()));
+                             Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => SignUpScreen()));
                           },
                           child: Text(
                             'Cadastre-se',
