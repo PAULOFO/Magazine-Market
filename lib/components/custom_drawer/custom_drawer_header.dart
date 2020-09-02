@@ -12,7 +12,7 @@ class CustomDrawerHeader extends StatelessWidget {
          );
       },
       child: Container(
-        color: Colors.deepPurple,
+        color: Colors.redAccent,
         height: 95,
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Row(
