@@ -39,6 +39,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     Observer(builder: (_){
                       return TextField(
+                        enabled: !signupStore.loading,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             hintText: 'Exemplo: Paulo S.',
@@ -56,6 +57,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     Observer(builder: (_){
                       return TextField(
+                        enabled: !signupStore.loading,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'Exemplo: paulo@gmail.com',
@@ -74,6 +76,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     Observer(builder: (_){
                       return TextField(
+                        enabled: !signupStore.loading,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'Exemplo: (99)  9999-9999',
@@ -94,6 +97,7 @@ class SignUpScreen extends StatelessWidget {
                       subtitle: 'Use letras maiúsculas e minúsculas, números e caracteres especiais',
                     ),
                     TextField(
+                      enabled: !signupStore.loading,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         isDense: true,
@@ -109,6 +113,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     Observer(builder: (_){
                       return TextField(
+                        enabled: !signupStore.loading,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           isDense: true,
@@ -119,20 +124,28 @@ class SignUpScreen extends StatelessWidget {
                       );
                     }),
                     const SizedBox(height: 10,),
-                    Container(
-                      height: 40,
-                      margin: const EdgeInsets.symmetric(vertical: 12),
-                      child: RaisedButton(
-                        color: Colors.orangeAccent,
-                        child: Text('CADASTRAR'),
-                        textColor: Colors.white,
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50),
+                    Observer(builder: (_){
+                      return Container(
+                        height: 40,
+                        margin: const EdgeInsets.symmetric(vertical: 12),
+                        child:  RaisedButton(
+                          color: Colors.orangeAccent,
+                          disabledColor: Colors.orangeAccent.withAlpha(120),
+                          child: signupStore.loading 
+                              ? CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation(Colors.white),
+                          ) 
+                              :  Text('CADASTRAR'),
+                          textColor: Colors.white,
+                          elevation: 10,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          onPressed: signupStore.signUpPressed,
+
                         ),
-                        onPressed: (){},
-                      ),
-                    ),
+                      );
+                    }),
                     Divider(color: Colors.black),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
