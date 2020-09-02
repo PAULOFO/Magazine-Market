@@ -54,32 +54,40 @@ class SignUpScreen extends StatelessWidget {
                       title: 'E-mail',
                       subtitle: 'Como aparecerá em seus anúncios',
                     ),
-                    TextField(
-                      decoration: InputDecoration(
+                    Observer(builder: (_){
+                      return TextField(
+                        decoration: InputDecoration(
                           border: OutlineInputBorder(),
+                          hintText: 'Exemplo: paulo@gmail.com',
                           isDense: true,
-                          hintText: 'Exemplo: paulo@gmail.com'
-                      ),
-                      keyboardType: TextInputType.emailAddress,
-                      autocorrect: false,
-                    ),
+                          errorText: signupStore.emailError,
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                        autocorrect: false,
+                        onChanged: signupStore.setEmail,
+                      );
+                    }),
                     SizedBox(height: 16,),
                     FieldTitle(
                       title: 'Celular',
                       subtitle: 'Proteja sua conta',
                     ),
-                    TextField(
-                      decoration: InputDecoration(
+                    Observer(builder: (_){
+                      return TextField(
+                        decoration: InputDecoration(
                           border: OutlineInputBorder(),
+                          hintText: 'Exemplo: (99)  9999-9999',
                           isDense: true,
-                          hintText: 'Exemplo: (99)  9999-9999'
-                      ),
-                      keyboardType: TextInputType.phone,
-                      inputFormatters: [
-                        WhitelistingTextInputFormatter.digitsOnly,
-                        TelefoneInputFormatter()
-                      ],
-                    ),
+                          errorText: signupStore.phoneError,
+                        ),
+                        keyboardType: TextInputType.phone,
+                        inputFormatters: [
+                          WhitelistingTextInputFormatter.digitsOnly,
+                          TelefoneInputFormatter()
+                        ],
+                        onChanged: signupStore.setPhone,
+                      );
+                    }),
                     SizedBox(height: 16,),
                     FieldTitle(
                       title: 'Senha',
@@ -87,23 +95,29 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     TextField(
                       decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          isDense: true,
+                        border: OutlineInputBorder(),
+                        isDense: true,
+                        errorText: signupStore.pass1Error
                       ),
                       obscureText: true,
+                      onChanged: signupStore.setPass1,
                     ),
                     SizedBox(height: 16,),
                     FieldTitle(
                       title: 'Confirmar Senha',
                       subtitle: 'Repita a senha',
                     ),
-                    TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        isDense: true,
-                      ),
-                      obscureText: true,
-                    ),
+                    Observer(builder: (_){
+                      return TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          isDense: true,
+                          errorText: signupStore.pass2Error,
+                        ),
+                        obscureText: true,
+                        onChanged: signupStore.setPass2,
+                      );
+                    }),
                     const SizedBox(height: 10,),
                     Container(
                       height: 40,
