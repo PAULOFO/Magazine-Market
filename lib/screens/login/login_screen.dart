@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:magazine_market/components/error_box.dart';
 import 'package:magazine_market/screens/signup/signup_screen.dart';
 import 'package:magazine_market/stores/login_store.dart';
 
@@ -39,6 +40,14 @@ class LoginScreen extends StatelessWidget {
                         color: Colors.grey[900],
                       ),
                     ),
+                    Observer(builder: (_){
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 4.0, bottom: 8),
+                        child: ErrorBox(
+                          message: loginStore.error,
+                        ),
+                      );
+                    }),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 4,),
                       child: Text(

@@ -1,3 +1,4 @@
+import 'package:magazine_market/repositories/user_repository.dart';
 import 'package:mobx/mobx.dart';
 import 'package:magazine_market/helpers/extensions.dart';
 
@@ -36,12 +37,19 @@ abstract class _LoginStore with Store {
   @observable
   bool loading = false;
 
+  @observable
+  String error;
+
   @action
   Future<void> _login() async {
     loading = true;
 
-    await Future.delayed(Duration(seconds: 3));
-
+    try {
+      final user = await UserRepository().loginWithEmail(email, password);
+      print(user);
+    } catch (e) {
+      error = e;
+    }
     loading = false;
   }
 }
