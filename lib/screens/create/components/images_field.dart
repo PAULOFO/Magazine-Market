@@ -8,6 +8,10 @@ import 'package:magazine_market/screens/create/components/image_source_modal.dar
 class ImagesField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    void onImageSelected(File iamge){
+      Navigator.of(context).pop();
+    }
+
     return Container(
       color: Colors.grey[200],
       height: 120,
@@ -22,12 +26,12 @@ class ImagesField extends StatelessWidget {
                 if (Platform.isAndroid) {
                   showModalBottomSheet(
                     context: context,
-                    builder: (_) => ImageSourceModal(),
+                    builder: (_) => ImageSourceModal(onImageSelected),
                   );
                 } else {
                   showCupertinoModalPopup(
                     context: context,
-                    builder: (_) => ImageSourceModal(),
+                    builder: (_) => ImageSourceModal(onImageSelected),
                   );
                 }
               },
