@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ImageSourceModal extends StatelessWidget {
   @override
@@ -19,7 +20,7 @@ class ImageSourceModal extends StatelessWidget {
                    Icon(Icons.camera_alt),
                    FlatButton(
                      child: const Text('Tirar foto'),
-                     onPressed: () {},
+                     onPressed: getFromCamera,
                    ),
                  ],
                ),
@@ -30,7 +31,7 @@ class ImageSourceModal extends StatelessWidget {
                    Icon(Icons.image),
                    FlatButton(
                      child: const Text('Escolher da galeria...'),
-                     onPressed: () {},
+                     onPressed: getFromGallery,
                    ),
                  ],
                ),
@@ -53,9 +54,7 @@ class ImageSourceModal extends StatelessWidget {
                          //fontSize: 20,
                        ),
                      ),
-                     onPressed: () {
-                       Navigator.of(context).pop();
-                     },
+                     onPressed: Navigator.of(context).pop,
                    ),
                  ],
                ),
@@ -72,20 +71,36 @@ class ImageSourceModal extends StatelessWidget {
               'Cancelar',
             style: TextStyle(color: Colors.redAccent),
           ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+           onPressed: Navigator.of(context).pop,
         ),
         actions: [
           CupertinoActionSheetAction(
             child: const Text('Câmera'),
-            onPressed: () {},
+            onPressed: getFromCamera,
           ),
           CupertinoActionSheetAction(
             child: const Text('Galeria'),
-            onPressed: () {},
+            onPressed: getFromGallery,
           ),
         ],
       );
+  }
+
+  Future<void> getFromCamera() async {
+    final pickerFile = await ImagePicker().getImage(
+        source: ImageSource.camera);
+    final image = File(pickerFile.path);
+    imageSelected(image);
+  }
+
+  Future<void> getFromGallery() async {
+    final pickerFile = await ImagePicker().getImage(
+        source: ImageSource.gallery);
+    final image = File(pickerFile.path);
+    imageSelected(image);
+  }
+
+  void imageSelected(File image) {
+
   }
 }
