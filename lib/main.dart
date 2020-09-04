@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:magazine_market/screens/base/base_screen.dart';
 import 'package:magazine_market/stores/page_store.dart';
+import 'package:magazine_market/stores/user_manager_store.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 import 'package:get_it/get_it.dart';
 
@@ -17,6 +18,7 @@ void main() async {
 //Singleton é um objeto que só existe um no app
 void setupLocators() {
   GetIt.I.registerSingleton(PageStore());
+  GetIt.I.registerSingleton(UserManagerStore());
 }
 
 Future<void> initializeParse() async {

@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:magazine_market/screens/login/login_screen.dart';
+import 'package:magazine_market/stores/page_store.dart';
+import 'package:magazine_market/stores/user_manager_store.dart';
 
 class CustomDrawerHeader extends StatelessWidget {
+
+  final UserManagerStore userManagerStore = GetIt.I<UserManagerStore>();
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
          Navigator.of(context).pop();//FECHA O DRAWER QDO VOLTAR
-         Navigator.of(context).push(
-           MaterialPageRoute(builder: (_) => LoginScreen())
-         );
+
+         if(userManagerStore.isLoggedIn){
+          GetIt.I<PageStore>().setPage(4);
+         } else {
+           Navigator.of(context).push(
+               MaterialPageRoute(builder: (_) => LoginScreen())
+           );
+         }
       },
       child: Container(
         color: Colors.redAccent,
@@ -24,14 +35,20 @@ class CustomDrawerHeader extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Acesse sua conta agora!',
+                  Text(
+                    userManagerStore.isLoggedIn
+                    ? userManagerStore.user.name
+                    : 'Acesse sua conta agora!',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.w500
                     ),
                   ),
-                  Text('Clique Aqui!',
+                  Text(
+                    userManagerStore.isLoggedIn
+                      ? userManagerStore.user.email
+                      : 'Clique Aqui!',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,
@@ -41,7 +58,6 @@ class CustomDrawerHeader extends StatelessWidget {
                 ],
               ),
             ),
-
           ],
         ),
       ),

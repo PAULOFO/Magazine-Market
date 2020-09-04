@@ -1,5 +1,7 @@
+import 'package:get_it/get_it.dart';
 import 'package:magazine_market/models/user.dart';
 import 'package:magazine_market/repositories/user_repository.dart';
+import 'package:magazine_market/stores/user_manager_store.dart';
 import 'package:mobx/mobx.dart';
 import 'package:magazine_market/helpers/extensions.dart';
 
@@ -15,7 +17,7 @@ abstract class _SignupStore with Store {
   @action
   void setName(String value) => name = value;
 
-  @computed
+  @computed //Monitora se tem erro
   bool get nameValid => name != null && name.length > 7;
   String get nameError {
     if(name == null || nameValid)
@@ -95,8 +97,8 @@ abstract class _SignupStore with Store {
   }
 
   @computed
-  bool get isFormValid => nameValid && phoneValid && emailValid
-      && pass1Valid && pass2Valid;
+  bool get isFormValid => nameValid  && emailValid
+      && phoneValid && pass1Valid && pass2Valid;
 
   @computed
   Function get signUpPressed => (isFormValid && !loading) ? _signUp : null;
@@ -120,7 +122,7 @@ abstract class _SignupStore with Store {
 
     try {
       final resultUser = await UserRepository().signUp(user);
-      //print(resultUser);
+      GetIt.I<UserManagerStore>().setUser(resultUser);
     } catch (e) {
       error = e;
     }

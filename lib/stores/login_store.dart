@@ -1,4 +1,6 @@
+import 'package:get_it/get_it.dart';
 import 'package:magazine_market/repositories/user_repository.dart';
+import 'package:magazine_market/stores/user_manager_store.dart';
 import 'package:mobx/mobx.dart';
 import 'package:magazine_market/helpers/extensions.dart';
 
@@ -46,7 +48,7 @@ abstract class _LoginStore with Store {
 
     try {
       final user = await UserRepository().loginWithEmail(email, password);
-      print(user);
+      GetIt.I<UserManagerStore>().setUser(user);
     } catch (e) {
       error = e;
     }

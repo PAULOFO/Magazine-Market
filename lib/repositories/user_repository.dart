@@ -6,7 +6,7 @@ import 'package:parse_server_sdk/parse_server_sdk.dart';
 class UserRepository {
 
   //Cadastro do Usuário
-  Future<void> signUp(User user) async {
+  Future<User> signUp(User user) async {
     final parseUser = ParseUser(
         user.email, user.password, user.email
         //username, password, emailAddress

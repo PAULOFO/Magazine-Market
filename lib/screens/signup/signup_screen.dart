@@ -106,16 +106,18 @@ class SignUpScreen extends StatelessWidget {
                       title: 'Senha',
                       subtitle: 'Use letras maiúsculas e minúsculas, números e caracteres especiais',
                     ),
-                    TextField(
-                      enabled: !signupStore.loading,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        isDense: true,
-                        errorText: signupStore.pass1Error
-                      ),
-                      obscureText: true,
-                      onChanged: signupStore.setPass1,
-                    ),
+                    Observer(builder: (_){
+                      return TextField(
+                        enabled: !signupStore.loading,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            isDense: true,
+                            errorText: signupStore.pass1Error
+                        ),
+                        obscureText: true,
+                        onChanged: signupStore.setPass1,
+                      );
+                    }),
                     SizedBox(height: 16,),
                     FieldTitle(
                       title: 'Confirmar Senha',
@@ -138,7 +140,7 @@ class SignUpScreen extends StatelessWidget {
                       return Container(
                         height: 40,
                         margin: const EdgeInsets.symmetric(vertical: 12),
-                        child:  RaisedButton(
+                        child: RaisedButton(
                           color: Colors.orangeAccent,
                           disabledColor: Colors.orangeAccent.withAlpha(120),
                           child: signupStore.loading 

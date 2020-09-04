@@ -139,6 +139,7 @@ class LoginScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 20, bottom: 12),
                       child: Wrap(
+                        alignment: WrapAlignment.center,
                         children: [
                           const Text(
                             'Não tem uma conta?',
