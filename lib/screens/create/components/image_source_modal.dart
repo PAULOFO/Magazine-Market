@@ -20,6 +20,13 @@ class ImageSourceModal extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Row(
+                children: [
+                  Container(
+
+                  ),
+                ],
+              ),
                Row(
                  mainAxisAlignment: MainAxisAlignment.center,
                  children: [
@@ -111,14 +118,14 @@ class ImageSourceModal extends StatelessWidget {
       androidUiSettings: AndroidUiSettings(
         toolbarTitle: 'Editar Imagem',
         toolbarColor: Colors.redAccent,
-        toolbarWidgetColor: Colors.orangeAccent
+        toolbarWidgetColor: Colors.white
       ),
       iosUiSettings: IOSUiSettings(
         title: 'Editar Imagem',
         cancelButtonTitle: 'Cancelar',
-        doneButtonTitle: 'Concluir',
-      ),
+        doneButtonTitle: 'Concluir',),
     );
-    onImageSelected(croppedFile);
+    if(croppedFile != null)
+      onImageSelected(croppedFile);
   }
 }
